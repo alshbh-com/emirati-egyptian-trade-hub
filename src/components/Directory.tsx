@@ -9,8 +9,8 @@ import { Search } from "lucide-react";
 
 const Directory = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
-  const [country, setCountry] = useState("");
+  const [category, setCategory] = useState("all");
+  const [country, setCountry] = useState("all");
 
   // Sample supplier data
   const suppliers = [
@@ -73,8 +73,8 @@ const Directory = () => {
   const filteredSuppliers = suppliers.filter(supplier => {
     const matchesSearch = supplier.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          supplier.products.some(product => product.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = category === "" || supplier.category === category;
-    const matchesCountry = country === "" || supplier.country === country;
+    const matchesCategory = category === "all" || supplier.category === category;
+    const matchesCountry = country === "all" || supplier.country === country;
 
     return matchesSearch && matchesCategory && matchesCountry;
   });
@@ -107,7 +107,7 @@ const Directory = () => {
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Categories</SelectItem>
+                <SelectItem value="all">All Categories</SelectItem>
                 <SelectItem value="Textiles & Apparel">Textiles & Apparel</SelectItem>
                 <SelectItem value="Electronics">Electronics</SelectItem>
                 <SelectItem value="Food & Beverages">Food & Beverages</SelectItem>
@@ -121,7 +121,7 @@ const Directory = () => {
                 <SelectValue placeholder="All Countries" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Countries</SelectItem>
+                <SelectItem value="all">All Countries</SelectItem>
                 <SelectItem value="Egypt">Egypt</SelectItem>
                 <SelectItem value="UAE">UAE</SelectItem>
               </SelectContent>
